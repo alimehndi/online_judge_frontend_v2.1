@@ -32,7 +32,7 @@ export default function LoginPage() {
     <>
      <DarkModeToggle/>
       {/* Full screen center box */}
-      <div className="flex justify-center items-center h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+      <div className="flex justify-center items-center h-screen bg-gray-100  dark:bg-gray-900 transition-colors duration-300">
         {/* Inner container with logo and sign-in form */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 flex flex-col md:flex-row gap-8 w-full max-w-4xl">
           {/* Left side: Logo and Welcome text */}

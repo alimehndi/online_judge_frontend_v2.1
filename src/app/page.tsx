@@ -14,6 +14,8 @@ import Link from 'next/link'; // Import Link component
 
 export default function Home() {
   return (
+    <div className="min-h-screen border shadow-lg m-4 rounded-xl dark:border-gray-700 dark:shadow-gray-800 dark:bg-gray-900 bg-white">
+
     <div className="flex justify-center items-center h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 flex flex-col items-center">
         <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
@@ -30,6 +32,7 @@ export default function Home() {
           </button>
         </Link>
       </div>
+    </div>
     </div>
   );
 }
