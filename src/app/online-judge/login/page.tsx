@@ -1,16 +1,28 @@
 "use client"
 import Image from "next/image";
 import DarkModeToggle from "../../darkModeToggle";
-import { useState } from "react";
+import { useState, useEffect ,useRef } from "react";
 import axios from "axios";
 import {z} from 'zod';
+import Script from "next/script";
 
 export default function LoginPage() {
   const schema = z.object({
     username: z.string().email({ message: "Email is required" }),
     password: z.string().min(6, { message: "Password must be at least 6 characters" }),
   });
+  const widgetRef = useRef(null);
   const [formData,setFormData]  = useState({username : "", password : ""});
+    useEffect(() => {
+    if (typeof window !== "undefined" && window.turnstile) {
+      window.turnstile.render(widgetRef.current, {
+        sitekey: "yourSitekey",
+        callback: function (token) {
+          console.log("Turnstile token:", token);
+        },
+      });
+    }
+  }, []);
   const authenticateUser = async (e : React.FormEvent) => {
     e.preventDefault();
     try{
@@ -30,6 +42,7 @@ export default function LoginPage() {
   return (
   
     <>
+       
      <DarkModeToggle/>
       {/* Full screen center box */}
       <div className="flex justify-center items-center h-screen bg-gray-100  dark:bg-gray-900 transition-colors duration-300">
@@ -63,9 +76,15 @@ export default function LoginPage() {
                 onChange={(e)=> {setFormData({...formData ,password : e.target.value})}}
                 className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              <div
+  class="cf-turnstile"
+  data-sitekey="0x4AAAAAABdx8ehdxMZzSryi"
+  data-callback="javascriptCallback"
+></div>
               <button
                 type="submit"
                 className="bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+
               >
                 Sign In
               </button>
